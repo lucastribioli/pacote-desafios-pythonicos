@@ -56,6 +56,42 @@ import sys
 
 # +++ SUA SOLUÇÃO +++
 # Defina as funções print_words(filename) e print_top(filename).
+def print_words(filename):
+    arquivo = open(filename, "r")
+    stringona = ""
+    ja_foi = []
+    for linha in arquivo:
+        stringona += linha.lower().replace("\n", "").replace(" ", "")
+
+    arquivo.close()
+    for letra in stringona:
+        if letra not in ja_foi and letra.isalpha():
+            print(f"{stringona.count(letra)} {letra}")
+            ja_foi.append(letra)
+
+
+def print_top(filename):
+    arquivo = open(filename, "r")
+    stringona = ""
+    ja_foi = []
+    lista = []
+    for linha in arquivo:
+        stringona += linha.lower().replace("\n", "").replace(" ", "")
+
+    arquivo.close()
+    top20 = 0
+    for letra in stringona:
+        if letra not in ja_foi and letra.isalpha():
+            lista.append((stringona.count(letra), letra))
+            ja_foi.append(letra)
+
+    lista.sort(reverse=True)
+
+    for item in lista:
+        print(f"{item[0]} {item[1]}")
+        top20 += 1
+        if top20 == 20:
+            break
 
 
 # A função abaixo chama print_words() ou print_top() de acordo com os

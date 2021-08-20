@@ -10,9 +10,21 @@ Exemplo: 'abcde', a metade da frente é 'abc' e a de trás é 'de'.
 Finalmente, dadas duas strings a e b, retorne uma string na forma:
 a-frente + b-frente + a-trás + b-trás
 """
+
+
 def front_back(a, b):
-    # +++ SUA SOLUÇÃO +++
-    return
+    front_a, back_a = slice_word(a)
+    front_b, back_b = slice_word(b)
+
+    return f"{front_a}{front_b}{back_a}{back_b}"
+
+
+def slice_word(word):
+    metade = len(word) // 2
+    if len(word) % 2 == 0:
+        return word[:metade], word[metade:]
+
+    return word[:metade + 1], word[metade + 1:]
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---

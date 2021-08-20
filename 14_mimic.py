@@ -43,28 +43,53 @@ import random
 import sys
 
 
+def get_dict(filename):
+    arquivo = open(filename, "r")
+    listona = []
+    dicionario = dict()
+
+    for linha in arquivo:
+        for word in linha.lower().replace("\n", " ").split(" "):
+                listona.append(word)
+
+    for i in range(len(listona)):
+        if i < len(listona) - 1:
+            if listona[i] in dicionario:
+                dicionario[listona[i]].append(listona[i + 1])
+            else:
+                dicionario[listona[i]] = [listona[i + 1]]
+    arquivo.close()
+
+    return dicionario
+
+
 def mimic_dict(filename):
-  """Retorna o dicionario imitador mapeando cada palavra para a lista de
-  palavras subsequentes."""
-    # +++ SUA SOLUÇÃO +++
-  return
+    return get_dict(filename)
 
 
 def print_mimic(mimic_dict, word):
-  """Dado o dicionario imitador e a palavra inicial, imprime texto de 200 palavras."""
-    # +++ SUA SOLUÇÃO +++
-  return
+    letter = word
+    count = 0
+    stringona = ""
+    while True:
+        if letter is not "":
+            stringona += f" {letter}"
+            count += 1
+        letter = random.choice(mimic_dict[letter])
+        if count == 200:
+            break
+    print(f" {stringona}. ")
 
 
 # Chama mimic_dict() e print_mimic()
 def main():
-  if len(sys.argv) != 2:
-    print('Utilização: ./14_mimic.py file-to-read')
-    sys.exit(1)
+    if len(sys.argv) != 2:
+        print('Utilização: ./14_mimic.py file-to-read')
+        sys.exit(1)
 
-  dict = mimic_dict(sys.argv[1])
-  print_mimic(dict, '')
+    dict = mimic_dict(sys.argv[1])
+    print_mimic(dict, '')
 
 
 if __name__ == '__main__':
-  main()
+    main()

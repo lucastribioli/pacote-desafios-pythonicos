@@ -10,8 +10,20 @@ A sua solução deve rodar em tempo linear, ou seja, deve fazer uma
 """
 
 def linear_merge(list1, list2):
-    # +++ SUA SOLUÇÃO +++
-    return
+    count = None
+    list_new = []
+    if len(list1) > len(list2):
+        count = len(list1)
+    else:
+        count = len(list2)
+
+    for i in range(count):
+        if i < len(list1):
+            list_new.append(list1[i])
+        if i < len(list2):
+            list_new.append(list2[i])
+    list_new.sort()
+    return list_new
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
